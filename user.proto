@@ -1,0 +1,18 @@
+syntax = "proto3";
+package api;
+option go_package = "api";
+
+service Database {
+    rpc GetUser(GetUserRequest) returns (User) {}
+    rpc InsertUser(User) returns (User) {}
+}
+
+message GetUserRequest {
+    string name = 1;
+}
+
+message User {
+    string name = 1;
+    int64 age = 2;
+    string car = 3;
+}

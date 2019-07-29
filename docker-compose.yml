@@ -1,0 +1,47 @@
+version: '3'
+services:
+
+  database:
+    image: postgres:10.1
+    env_file:
+      - db.env
+    volumes:
+      - ./backend/database:/docker-entrypoint-initdb.d/
+    ports:
+      - 5432:5432
+
+  database-service:
+    build:
+      context: .
+      dockerfile: database-service.Dockerfile
+    env_file:
+      - db.env
+    ports:
+      - 9000:9000
+
+  grpc-form-service:
+    build:
+      context: .
+      dockerfile: service.Dockerfile
+    ports:
+      - 50051:50051
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - grpc-form-service
+      - proxy
+    ports:
+      - 80:80
+    volumes:
+      - ./frontend:/usr/src/app:rw
+
+  proxy:
+    image: envoyproxy/envoy-alpine:v1.10.0
+    environment:
+      NODE_ENV: development
+    ports:
+      - 8080:8080
+      - 8081:8081
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml

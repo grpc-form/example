@@ -30,43 +30,6 @@ func main() {
 	}
 	db := api.NewDatabaseClient(conn)
 
-	carOptions := []*grpcform.Option{
-		{Index: NO, Value: "No"},
-		{Index: YES, Value: "Yes"},
-	}
-
-	brandOptions := []*grpcform.Option{
-		{Index: 1, Value: "Audi"},
-		{Index: 2, Value: "BMW"},
-		{Index: 3, Value: "Bentley"},
-		{Index: 4, Value: "Chevrolet"},
-		{Index: 5, Value: "FIAT"},
-		{Index: 6, Value: "Ferrari"},
-		{Index: 7, Value: "Ford"},
-		{Index: 8, Value: "HUMMER"},
-		{Index: 9, Value: "Hyundai"},
-		{Index: 10, Value: "Jaguar"},
-		{Index: 11, Value: "Jeep"},
-		{Index: 12, Value: "Kia"},
-		{Index: 13, Value: "Lamborghini"},
-		{Index: 14, Value: "Maybach"},
-		{Index: 15, Value: "Mazda"},
-		{Index: 16, Value: "McLaren"},
-		{Index: 17, Value: "Mercedes-Benz"},
-		{Index: 18, Value: "Nissan"},
-		{Index: 19, Value: "Opel"},
-		{Index: 20, Value: "Jaguar"},
-		{Index: 21, Value: "Porsche"},
-		{Index: 22, Value: "Renault"},
-		{Index: 23, Value: "Skoda"},
-		{Index: 24, Value: "Suzuki"},
-		{Index: 25, Value: "Tesla"},
-		{Index: 26, Value: "Toyota"},
-		{Index: VOLKSWAGEN, Value: "Volkswagen"},
-		{Index: 28, Value: "Volvo"},
-		{Index: 29, Value: "smart"},
-	}
-
 	s := grpcform.New()
 	s.Add(func() *grpcform.Form {
 		return &grpcform.Form{
@@ -101,9 +64,12 @@ func main() {
 					InstantValidate: true,
 					Status:          grpcform.FieldStatus_FIELD_STATUS_REQUIRED,
 					SelectField: &grpcform.SelectField{
-						Index:   NO,
-						Type:    grpcform.SelectType_SELECT_TYPE_SIMPLE,
-						Options: carOptions,
+						Index: NO,
+						Type:  grpcform.SelectType_SELECT_TYPE_SIMPLE,
+						Options: []*grpcform.Option{
+							{Index: NO, Value: "No"},
+							{Index: YES, Value: "Yes"},
+						},
 					},
 					HiddenIf: &grpcform.HiddenIf{
 						Validators: []*grpcform.Validator{
@@ -119,9 +85,39 @@ func main() {
 					InstantValidate: true,
 					Label:           "What kind of car are you driving?",
 					SelectField: &grpcform.SelectField{
-						Index:   VOLKSWAGEN,
-						Type:    grpcform.SelectType_SELECT_TYPE_MULTI,
-						Options: brandOptions,
+						Index: VOLKSWAGEN,
+						Type:  grpcform.SelectType_SELECT_TYPE_MULTI,
+						Options: []*grpcform.Option{
+							{Index: 1, Value: "Audi"},
+							{Index: 2, Value: "BMW"},
+							{Index: 3, Value: "Bentley"},
+							{Index: 4, Value: "Chevrolet"},
+							{Index: 5, Value: "FIAT"},
+							{Index: 6, Value: "Ferrari"},
+							{Index: 7, Value: "Ford"},
+							{Index: 8, Value: "HUMMER"},
+							{Index: 9, Value: "Hyundai"},
+							{Index: 10, Value: "Jaguar"},
+							{Index: 11, Value: "Jeep"},
+							{Index: 12, Value: "Kia"},
+							{Index: 13, Value: "Lamborghini"},
+							{Index: 14, Value: "Maybach"},
+							{Index: 15, Value: "Mazda"},
+							{Index: 16, Value: "McLaren"},
+							{Index: 17, Value: "Mercedes-Benz"},
+							{Index: 18, Value: "Nissan"},
+							{Index: 19, Value: "Opel"},
+							{Index: 20, Value: "Jaguar"},
+							{Index: 21, Value: "Porsche"},
+							{Index: 22, Value: "Renault"},
+							{Index: 23, Value: "Skoda"},
+							{Index: 24, Value: "Suzuki"},
+							{Index: 25, Value: "Tesla"},
+							{Index: 26, Value: "Toyota"},
+							{Index: VOLKSWAGEN, Value: "Volkswagen"},
+							{Index: 28, Value: "Volvo"},
+							{Index: 29, Value: "smart"},
+						},
 					},
 					RequiredIf: &grpcform.RequiredIf{
 						Validators: []*grpcform.Validator{

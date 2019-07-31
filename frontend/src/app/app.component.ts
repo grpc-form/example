@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  template: `
+	selector: 'app-root',
+	template: `
 <ng-mat-grpc-form name="car" host="http://localhost:8080" (success)="onSuccess($event)"></ng-mat-grpc-form>
   `,
-  styles: [`
+	styles: [`
 .mat-angoform-wrapper {
     min-width: 150px;
     max-width: 500px;
@@ -47,7 +47,7 @@ import { Component } from '@angular/core';
   `]
 })
 export class AppComponent {
-  onSuccess(msg: string) {
-    alert(msg);
-  }
+	onSuccess(msg: string) {
+		alert(msg);
+	}
 }
